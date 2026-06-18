@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBPN Project Data Entry</title>
+    <style>
+        /* --- CSS STYLING --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .header-block {
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        h2 { 
+            margin: 0; 
+            color: #2c3e50; 
+            font-size: 24px; 
+        }
+
+        p.subtitle { 
+            margin: 5px 0 0 0; 
+            color: #7f8c8d; 
+            font-size: 14px; 
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .form-grid { 
+                grid-template-columns: 1fr; 
+            }
+        }
+        
+        .form-group { 
+            display: flex; 
+            flex-direction: column; 
+        }
+
+        label { 
+            margin-bottom: 6px; 
+            font-weight: 600; 
+            font-size: 14px; 
+            color: #34495e; 
+        }
+        
+        input[type="text"], 
+        input[type="number"], 
+        select {
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #cbd5e1; 
+            border-radius: 4px; 
+            box-sizing: border-box; 
+            font-size: 14px; 
+            transition: border-color 0.2s;
+        }
+
+        input:focus, 
+        select:focus { 
+            outline: none; 
+            border-color: #27ae60; 
+        }
+        
+        button {
+            background-color: #27ae60; 
+            color: white; 
+            padding: 12px 20px; 
+            border: none; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: bold; 
+            width: 100%; 
+            transition: background 0.2s;
+        }
+
+        button:hover { 
+            background-color: #219653; 
+        }
+        
+        .table-container { 
+            margin-top: 40px; 
+            overflow-x: auto; 
+        }
+
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 15px; 
+            font-size: 14px; 
+        }
+
+        th, td { 
+            padding: 12px 15px; 
+            text-align: left; 
+            border-bottom: 1px solid #e2e8f0; 
+        }
+
+        th { 
+            background-color: #2c3e50; 
+            color: white; 
+            font-weight: 600; 
+        }
+
+        tr:hover { 
+            background-color: #f8fafc; 
+        }
+
+        .no-data { 
+            text-align: center; 
+            color: #94a3b8; 
+            font-style: italic; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-block">
+        <h2>GBPN Building Decarbonization Tracker</h2>
+        <p class="subtitle">Global Buildings Performance Network Policy & Energy Assessment Data Entry</p>
+    </div>
+    
+    <form id="gbpnForm">
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="projectName">Project Name / ID</label>
+                <input type="text" id="projectName" required placeholder="e.g., Southeast Asia Housing Pilot">
+            </div>
+            
+            <div class="form-group">
+                <label for="region">Region / Country</label>
+                <select id="region" required>
+                    <option value="">-- Select Location --</option>
+                    <option value="India">India</option>
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="Vietnam">Vietnam</option>
+                    <option value="Other SEA">Other Southeast Asia</option>
+                    <option value="Europe/Global">Europe / Global Hub</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="buildingType">Building Typology</label>
+                <select id="buildingType" required>
+                    <option value="">-- Select Typology --</option>
+                    <option value="Residential (Affordable)">Residential (Affordable)</option>
+                    <option value="Residential (Commercial)">Residential (Commercial)</option>
+                    <option value="Commercial Office">Commercial Office</option>
+                    <option value="Public/Institutional">Public / Institutional</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="floorArea">Total Floor Area (m²)</label>
+                <input type="number" id="floorArea" min="1" required placeholder="e.g., 2500">
+            </div>
+
+            <div class="form-group">
+                <label for="codeCompliance">Target Energy Code Policy</label>
+                <select id="codeCompliance" required>
+                    <option value="">-- Select Code Target --</option>
+                    <option value="ZEB Target">Zero Emission Building (ZEB)</option>
+                    <option value="ECBC Compliant">ECBC Compliant (India)</option>
+                    <option value="BCA Green Mark">BCA Green Mark Equivalent</option>
+                    <option value="Local Baseline +20%">Local Baseline +20% Efficiency</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="co2Reduction">Estimated CO₂ Abatement (tCO₂e/year)</label>
+                <input type="number" id="co2Reduction" min="0" step="0.1" required placeholder="e.g., 45.5">
+            </div>
+        </div>
+
+        <button type="submit">Submit Project Data</button>
+    </form>
+
+    <div class="table-container">
+        <h2>Logged Projects</h2>
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Region</th>
+                    <th>Typology</th>
+                    <th>Floor Area (m²)</th>
+                    <th>Policy Target</th>
+                    <th>CO₂ Savings (t/yr)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="noDataRow">
+                    <td colspan="6" class="no-data">No project data recorded yet.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.getElementById('gbpnForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const projectName = document.getElementById('projectName').value;
+        const region = document.getElementById('region').value;
+        const buildingType = document.getElementById('buildingType').value;
+        const floorArea = document.getElementById('floorArea').value;
+        const codeCompliance = document.getElementById('codeCompliance').value;
+        const co2Reduction = document.getElementById('co2Reduction').value;
+
+        const tableBody = document.querySelector('#dataTable tbody');
+
+        const noDataRow = document.getElementById('noDataRow');
+        if (noDataRow) {
+            noDataRow.remove();
+        }
+
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td><strong>${projectName}</strong></td>
+            <td>${region}</td>
+            <td>${buildingType}</td>
+            <td>${Number(floorArea).toLocaleString()} m²</td>
+            <td>${codeCompliance}</td>
+            <td>${co2Reduction} tCO₂e</td>
+        `;
+
+        tableBody.appendChild(newRow);
+        document.getElementById('gbpnForm').reset();
+    });
+</script>
+
+<iframe
+    src="https://provide-struct-houses-conversations.trycloudflare.com/chats/widget?shared_id=015a727069b011f1b70b27b4d412004c&from=chat&auth=0ZhPH0R-i6e3Url15JNKSWFUQBXX6G7h&locale=en&visible_avatar=1&locale=en&mode=master&streaming=true&muted=true&widget_accent_color=%232563eb&widget_background_color=%23ffffff&widget_text_color=%23111827&widget_header_text_color=%23ffffff&widget_footer_text_color=%23111827"
+    style="position:fixed;bottom:20px;right:20px;width:120px;height:120px;border:none;background:transparent;z-index:9999;"
+    frameborder="0"
+    allow="microphone;camera"
+    id="chat-bubble-launcher"
+    >
+</iframe>
+
+<script>
+    window.addEventListener('message', e => {
+        // Security check for iframe server origin
+        if (e.origin !== 'https://provide-struct-houses-conversations.trycloudflare.com') return;
+        
+        // Action 1: Create the main expanded window
+        if (e.data.type === 'CREATE_CHAT_WINDOW') {
+            if (document.getElementById('chat-win')) return;
+            const i = document.createElement('iframe');
+            i.id = 'chat-win';
+            i.src = e.data.src;
+            i.style.cssText = 'position:fixed;bottom:104px;right:24px;width:380px;height:500px;border:none;background:white;box-shadow:0 5px 40px rgba(0,0,0,0.16);border-radius:12px;z-index:9998;display:none';
+            i.frameBorder = '0'; 
+            i.allow = 'microphone;camera';
+            document.body.appendChild(i);
+        } 
+        // Action 2: Show or hide the main chat window when launcher bubble is clicked
+        else if (e.data.type === 'TOGGLE_CHAT') {
+            const w = document.getElementById('chat-win');
+            if (w) w.style.display = e.data.isOpen ? 'block' : 'none';
+        } 
+        // Action 3: Pass passive page scrolls through
+        else if (e.data.type === 'SCROLL_PASSTHROUGH') {
+            window.scrollBy(0, e.data.deltaY);
+        }
+    });
+</script>
+
+</body>
+</html>
